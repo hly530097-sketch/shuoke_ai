@@ -176,7 +176,7 @@ def get_pose_tracker():
     return PoseTracker()
 
 st.set_page_config(page_title="3D说课智能协同诊评系统", layout="wide")
-st.title("🎓 3D说课智能协同诊评系统")
+st.title("🎓 “知行云脑”——面向小学科学探究教学的具身多维智能诊评系统")
 st.info("💡 平台已开启【三位一体多模态通道】：支持说课稿、PPT 课件与实况视频协同诊评。")
 
 col1, col2 = st.columns([1, 1.2])
