@@ -6,7 +6,11 @@ import os
 import json
 from datetime import datetime
 import plotly.graph_objects as go
-from pose_analyzer import PoseTracker
+try:
+    from pose_analyzer import PoseTracker
+    HAS_POSE_TRACKER = True
+except Exception:
+    HAS_POSE_TRACKER = False
 
 COZE_API_KEY = "pat_EvZ6I6I0luMEldZD7zuVAshog9OK5MSYknoRrCBDHmvA7hQdlWMN56cI3BoZjzQL"
 COZE_SCRIPT_BOT_ID = "7642156410809384969"
