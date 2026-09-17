@@ -208,7 +208,7 @@ with col1:
     uploaded_video = st.file_uploader("📹 上传说课实况视频（支持 mp4 格式）：", type=["mp4"])
     st.caption("💡 拍摄规范：建议横屏 16:9 录制，机位正对讲台，确保老师保持中景（胸部以上或全身可见）。")
 
-    start_btn = st.button("🚀 开启 3D 三位一体智能协同诊评", use_container_width=True)
+    start_btn = st.button("🚀 开启“知行云脑”多维多模态智能协同诊评", use_container_width=True)
 
 with col2:
     st.write("### 📑 第二步：多模态智能协同诊评报告")
