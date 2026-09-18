@@ -88,7 +88,14 @@ st.markdown("""
 # 2. 扣子云端双脑协同 API 配置区
 # ==============================================================================
 # 优先从 Streamlit Secrets 读取，如无则使用默认有效令牌
-COZE_API_KEY = st.secrets.get("COZE_API_KEY", "pat_mE0gNlB8jL7l6wYl9A6S5D4F3G2H1J0K")  # 请确保您的 PAT 有效
+try:
+    COZE_API_KEY = st.secrets.get("COZE_API_KEY", "")
+except Exception:
+    COZE_API_KEY = ""
+
+# 如果在左侧没有配置密码，允许在页面上直接使用（或直接填入您的专属有效 PAT 令牌）
+if not COZE_API_KEY:
+    COZE_API_KEY = "pat_mE0gNlB8jL7l6wYl9A6S5D4F3G2H1J0K"  # 填入您之前跑通的有效 PAT
 BOT_TEXT_ID = "7642156410809384969"   # Bot 1: 教学理论与课标溯源指导师
 BOT_PPT_ID = "7643667281079959561"    # Bot 2: 探究支架与课件评估专家
 
@@ -194,13 +201,20 @@ with col_input:
         student_name = c1.text_input("准教师姓名", placeholder="例如：李科学")
         student_id = c2.text_input("学籍学号", placeholder="例如：2025010203")
         db_file = st.text_input("实训数据库归档文件", value="shuoke_records_inquiry.xlsx")
+        
+        # 👉 这里是已经对齐好空格的 Excel 按钮：
+        if st.button("📁 一键在电脑中打开此 Excel 归档表"):
+            if os.path.exists(db_file):
+                os.startfile(db_file)
+            else:
+                st.info(f"💡 表格 `{db_file}` 尚未生成。在下方点击一次【开启诊评】后，系统会自动创建并打开它！")
 
     # 80:20 黄金二八课型选择器
     lesson_type = st.radio(
         "🎯 科学探究课型定位（二八全景覆盖模式）",
         options=[
             "【80% 常态基石】常规课标概念探究课（重在原理溯源、5E阶梯与规范教态）",
-            "【20% 卓越先锋】跨学科工程与非良构困局探究课（重在两难权衡、包容试错与高阶思维）"
+            "【20% 卓越先锋】跨学科工程与非良构困局探究课（重在多元博弈、系统权衡与包容试错）"
         ],
         index=0
     )
